@@ -1,0 +1,47 @@
+class Solution {
+    public ListNode multiplyTwoLists(ListNode first, ListNode second) {
+        long num1 = listToNumber(first);
+        long num2 = listToNumber(second);
+        long product = num1 * num2;
+        return numberToList(product);
+    }
+    public ListNode reverseList(ListNode head) {
+        ListNode prev = null;
+        ListNode curr = head;
+        while (curr != null) {
+            ListNode next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        return prev;
+    }
+    public long listToNumber(ListNode head) {
+        long num = 0;
+        while (head != null) {
+            num = num * 10 + head.val;
+            head = head.next;
+        }
+        return num;
+    }
+    public ListNode numberToList(long num) {
+        if (num == 0) {
+            return new ListNode(0);
+        }
+        ListNode head = null;
+        ListNode curr = null;
+        while (num > 0) {
+            int digit = (int) (num % 10);
+            if (head == null) {
+                head = new ListNode(digit);
+                curr = head;
+            } else {
+                curr.next = new ListNode(digit);
+                curr = curr.next;
+            }
+            num /= 10;
+        }
+        head = reverseList(head);
+        return head;
+    }
+}
