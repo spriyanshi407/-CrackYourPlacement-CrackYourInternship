@@ -1,0 +1,28 @@
+class Solution {
+    public ListNode removeNodes(ListNode head) {
+        ListNode reversedHead = reverseList(head);
+        ListNode current = reversedHead;
+        ListNode maxNode = reversedHead;
+        while (current != null && current.next != null) {
+            if (current.next.val < maxNode.val) {
+                current.next = current.next.next;
+            } else {
+                current = current.next;
+                maxNode = current;
+            }
+        }
+        return reverseList(reversedHead);
+    }
+    private ListNode reverseList(ListNode head) {
+        ListNode prev = null;
+        ListNode current = head;
+        ListNode next = null;
+        while (current != null) {
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+        return prev;
+    }
+}
