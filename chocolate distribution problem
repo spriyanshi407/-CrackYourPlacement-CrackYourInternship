@@ -1,0 +1,20 @@
+import java.util.Arrays;
+class Solution {
+    public static int findMinDiff(int[] A, int N, int M) {
+        if (M == 0 || N == 0) {
+            return 0;
+        }
+        if (N < M) {
+            return -1;
+        }
+        Arrays.sort(A);
+        int minDifference = Integer.MAX_VALUE;
+        for (int i = 0; i <= N - M; i++) {
+            int difference = A[i + M - 1] - A[i];
+            if (difference < minDifference) {
+                minDifference = difference;
+            }
+        }
+        return minDifference;
+    }
+}
